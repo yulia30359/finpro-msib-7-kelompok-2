@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Student Dashboard</title>
+    <!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+    <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+    <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+    <!-- CHART.JS STYLES -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Styling */
+        body {
+            background-color: #f4f7f6; /* Background color for the body */
+            font-family: 'Roboto', sans-serif; /* Font family for the page */
+            margin: 0; /* Remove default margin */
+            padding: 0; /* Remove default padding */
+        }
+
+        .navbar-default {
+            background-color: #34495e; /* Navbar background color */
+            border-color: #34495e; /* Navbar border color */
+            margin-bottom: 0; /* Remove bottom margin */
+            width: calc(100% - 220px); /* Set width of navbar */
+            position: fixed; /* Fix position of navbar */
+            left: 220px; /* Position navbar to the right */
+            z-index: 1000; /* Ensure navbar is on top */
+        }
+
+        .navbar-default .navbar-brand,
+        .navbar-default .navbar-nav>li>a {
+            color: #ecf0f1; /* Text color for brand and nav links */
+        }
+
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-nav>li>a:hover {
+            color: #fff; /* Text color on hover */
+        }
+
+        .sidebar-collapse {
+            background-color: #2c3e50; /* Sidebar background color */
+            padding: 15px 0; /* Padding for sidebar */
+            position: fixed; /* Fix position of sidebar */
+            width: 220px; /* Set sidebar width */
+            height: 100%; /* Full height for sidebar */
+            top: 0; /* Align to top */
+            left: 0; /* Align to left */
+            z-index: 1000; /* Ensure sidebar is on top */
+        }
+
+        .nav>li>a {
+            color: #bdc3c7; /* Color for nav links */
+            padding: 15px 20px; /* Padding for nav links */
+            font-size: 16px; /* Font size for nav links */
+            display: block; /* Display as block */
+        }
+
+        .nav>li>a:hover {
+            background-color: #34495e; /* Background color on hover */
+            color: #fff; /* Text color on hover */
+        }
+
+        #page-wrapper {
+            margin-left: 220px; /* Margin for page wrapper */
+            padding: 30px; /* Padding for page wrapper */
+        }
+
+        .container-fluid {
+            padding: 15px; /* Padding for container */
+        }
+
+        h2,
+        h5 {
+            color: #2c3e50; /* Heading text color */
+            font-weight: 700; /* Font weight for headings */
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: #fff; /* Card background color */
+            border-radius: 10px; /* Rounded corners for card */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect for card */
+            padding: 20px; /* Padding inside card */
+            margin-bottom: 30px; /* Margin at bottom of card */
+        }
+
+        .list-group-item {
+            background-color: #fff; /* Background color for list items */
+            border: 1px solid #ddd; /* Border for list items */
+            border-radius: 8px; /* Rounded corners for list items */
+            margin-bottom: 15px; /* Margin at bottom of list items */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* Shadow effect for list items */
+        }
+
+        /* Chart Container */
+        .chart-container {
+            padding: 20px; /* Padding for chart container */
+            background-color: #fff; /* Background color for chart container */
+            border-radius: 10px; /* Rounded corners for chart container */
+            margin-bottom: 30px; /* Margin at bottom of chart container */
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Shadow effect for chart container */
+        }
+
+        /* Button Styling */
+        .btn-primary {
+            background-color: #3498db; /* Background color for primary button */
+            border: none; /* No border for button */
+            padding: 10px 20px; /* Padding for button */
+            font-size: 14px; /* Font size for button */
+            font-weight: 500; /* Font weight for button */
+            border-radius: 5px; /* Rounded corners for button */
+        }
+
+        /* Responsive Styling */
+        @media (max-width: 768px) {
+            .sidebar-collapse {
+                position: relative; /* Change position for smaller screens */
+                width: 100%; /* Full width for sidebar */
+                height: auto; /* Auto height for sidebar */
+            }
+
+            .navbar-default {
+                position: relative; /* Change position for navbar on smaller screens */
+                left: 0; /* Reset left position */
+                width: 100%; /* Full width for navbar */
+            }
+
+            #page-wrapper {
+                margin-left: 0; /* Reset margin for page wrapper */
+            }
+        }
+
+        /* Progress Bar Styling */
+        .progress {
+            background-color: #2c3e50; /* Background color for progress bar */
+            border-radius: 20px; /* Rounded corners for progress bar */
+            height: 25px; /* Height for progress bar */
+            overflow: hidden; /* Hide overflow */
+        }
+
+        .progress-bar {
+            background-color: #3498db; /* Background color for progress bar */
+            line-height: 25px; /* Line height for text in progress bar */
+            color: white; /* Text color for progress bar */
+            text-align: center; /* Center text in progress bar */
+        }
+
+        /* Alert Styling */
+        .alert {
+            font-size: 16px; /* Font size for alerts */
+            font-weight: 500; /* Font weight for alerts */
+            padding: 20px; /* Padding for alerts */
+            border-radius: 10px; /* Rounded corners for alerts */
+        }
+
+        /* Clock Styling */
+        #clock {
+            font-size: 20px; /* Font size for clock */
+            font-weight: 600; /* Font weight for clock */
+        }
+
+        /* Footer Styling */
+        footer {
+            background-color: #34495e; /* Background color for footer */
+            color: #ecf0f1; /* Text color for footer */
+            text-align: center; /* Center text in footer */
+            padding: 10px 0; /* Padding for footer */
+            position: fixed; /* Fix position of footer */
+            bottom: 0; /* Align to bottom */
+            left: 220px; /* Position footer to the right */
+            right: 0; /* Align to right */
+            z-index: 1000; /* Ensure footer is on top */
+        }
+
+        /* Adjust footer for responsiveness */
+        @media (max-width: 768px) {
+            footer {
+                left: 0; /* Reset left position */
+                width: 100%; /* Full width for footer */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-default navbar-side" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-side-collapse">
+                    <span class="sr-only">Toggle navigation</span> <!-- Screen reader only text -->
+                    <span class="icon-bar"></span> <!-- First icon bar for toggle -->
+                    <span class="icon-bar"></span> <!-- Second icon bar for toggle -->
+                    <span class="icon-bar"></span> <!-- Third icon bar for toggle -->
+                </button>
+                <a class="navbar-brand" href="#"><i class="fa fa-tasks"></i>&nbsp;Online Course</a> <!-- Brand link -->
+            </div>
+        </div>
+        <div class="collapse navbar-collapse sidebar-collapse" id="navbar-side-collapse">
+            <ul class="nav" id="main-menu"> <!-- Navigation menu -->
+                <li>
+                    <a href="my_courses.html"><i class="fa fa-book"></i>My Courses</a> <!-- Link to My Courses page -->
+                </li>
+                <li>
+                    <a href="assignments.html" class="active"><i class="fa fa-tasks"></i>Notifications</a> <!-- Link to Notifications page -->
+                </li>
+                <li>
+                    <a href="profile.html"><i class="fa fa-user"></i>Profile</a> <!-- Link to Profile page -->
+                </li>
+                <li>
+                    <a href="dashboard.html"><i class="fa fa-dashboard"></i>Dashboard</a> <!-- Link to Dashboard page -->
+                </li>
+            </ul>
+        </div>
+    </nav>
+     <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <h5>Course Progress</h5>
+                        <div class="progress">
+                            <div class="progress-bar" style="width: 70%;">70%</div> <!-- Progress bar for course -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <h5>Performance Chart</h5>
+                        <canvas id="performanceChart"></canvas> <!-- Canvas for chart -->
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <h5>Completion Statistics</h5>
+                        <canvas id="completionChart"></canvas> <!-- Canvas for chart -->
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <h5>Announcements</h5>
+                        <ul class="list-group">
+                            <li class="list-group-item">New course added: Web Development Basics</li> <!-- Announcement item -->
+                            <li class="list-group-item">Upcoming assignment due next week</li> <!-- Announcement item -->
+                            <li class="list-group-item">Webinar on AI scheduled for next month</li> <!-- Announcement item -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Online Course Platform</p> <!-- Footer text -->
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Clock Functionality
+        function updateClock() {
+            var now = new Date(); // Get current date and time
+            var hours = now.getHours(); // Get current hours
+            var minutes = now.getMinutes(); // Get current minutes
+            var seconds = now.getSeconds(); // Get current seconds
+            minutes = (minutes < 10 ? "0" : "") + minutes; // Add leading zero to minutes
+            seconds = (seconds < 10 ? "0" : "") + seconds; // Add leading zero to seconds
+            document.getElementById('clock').innerHTML = hours + ":" + minutes + ":" + seconds; // Display clock
+        }
+        setInterval(updateClock, 1000); // Update clock every second
+
+        // Chart.js for Performance Chart
+        var ctx = document.getElementById('performanceChart').getContext('2d'); // Get context for performance chart
+        var performanceChart = new Chart(ctx, {
+            type: 'bar', // Bar chart
+            data: {
+                labels: ['Module 1', 'Module 2', 'Module 3'], // X-axis labels
+                datasets: [{
+                    label: 'Scores', // Legend label
+                    data: [85, 90, 75], // Data for scores
+                    backgroundColor: ['#3498db', '#2ecc71', '#e74c3c'], // Colors for bars
+                }]
+            },
+            options: {
+                responsive: true, // Make chart responsive
+                scales: {
+                    y: {
+                        beginAtZero: true // Start Y-axis at zero
+                    }
+                }
+            }
+        });
+
+        // Chart.js for Completion Chart
+        var ctx2 = document.getElementById('completionChart').getContext('2d'); // Get context for completion chart
+        var completionChart = new Chart(ctx2, {
+            type: 'pie', // Pie chart
+            data: {
+                labels: ['Completed', 'In Progress', 'Not Started'], // Labels for pie chart
+                datasets: [{
+                    label: 'Course Status', // Legend label
+                    data: [60, 30, 10], // Data for completion status
+                    backgroundColor: ['#3498db', '#2ecc71', '#e74c3c'], // Colors for pie segments
+                }]
+            },
+            options: {
+                responsive: true // Make chart responsive
+            }
+        });
+    </script>
+</body>
+
+</html>
