@@ -1,0 +1,35 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+    viewBox="0 0 600 200" xml:space="preserve" width="600px" height="200px">
+    <!-- Circle background -->
+    <circle cx="100" cy="100" r="95" fill="#A8DADC" stroke="none"></circle> <!-- Light Blue Background -->
+
+    <!-- Enlarged Mountains -->
+    <polygon points="70,120 30,160 130,160" fill="#1D3557" /> <!-- Dark Blue Mountains -->
+    <polygon points="115,90 60,140 150,140" fill="#457B9D" /> <!-- Medium Blue Mountains -->
+
+    <!-- Sun above the mountains -->
+    <circle cx="100" cy="60" r="20" fill="#E63946" /> <!-- Larger Red Sun -->
+
+    <!-- Clouds -->
+    <ellipse cx="60" cy="50" rx="30" ry="15" fill="#F1FAEE" opacity="0.9"/> <!-- Larger White Cloud -->
+    <ellipse cx="80" cy="50" rx="40" ry="20" fill="#F1FAEE" opacity="0.9"/> <!-- Larger White Cloud -->
+    <ellipse cx="120" cy="55" rx="35" ry="17" fill="#F1FAEE" opacity="0.9"/> <!-- Larger White Cloud -->
+
+    <!-- Trees -->
+    <rect x="55" y="145" width="5" height="20" fill="#2A9D8F"/> <!-- Larger Green Tree Trunk -->
+    <polygon points="53,148 58,148 55.5,142" fill="#2A9D8F" /> <!-- Green Tree Leaves -->
+    <rect x="75" y="145" width="5" height="20" fill="#2A9D8F"/> <!-- Larger Green Tree Trunk -->
+    <polygon points="73,148 78,148 75.5,142" fill="#2A9D8F" /> <!-- Green Tree Leaves -->
+
+    <!-- Stars below the mountain -->
+    <circle cx="90" cy="155" r="3" fill="#FFD700" /> <!-- Larger Yellow Stars -->
+    <circle cx="110" cy="155" r="3" fill="#FFD700" /> <!-- Larger Yellow Stars -->
+    <circle cx="130" cy="155" r="3" fill="#FFD700" /> <!-- Larger Yellow Stars -->
+
+    <!-- Decorative border around the circle -->
+    <circle cx="100" cy="100" r="95" fill="none" stroke="#E63946" stroke-width="2"/> <!-- Red Outer Border -->
+    <circle cx="100" cy="100" r="85" fill="none" stroke="#E63946" stroke-width="1" stroke-dasharray="5,5"/> <!-- Red Dashed Border -->
+
+    <!-- Title "Wisata Indonesia" beside the logo -->
+    <text x="220" y="120" font-family="Arial" font-size="48" font-weight="bold" fill="#FFFFFF">Wisata Alam</text> <!-- Larger white title -->
+</svg>
