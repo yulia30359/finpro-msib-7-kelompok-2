@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation Menu -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow">
+        <div class="container-fluid">
+            <a class="navbar-brand mx-auto" href="#">EduPlatform</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+                <ul class="navbar-nav text-center">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Courses</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Tasks</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Logout</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-xl-8 col-lg-7 col-md-12 mb-4">
+                <h3>Enrolled Courses</h3>
+                <div class="card mb-3 course-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Algorithms and Data Structures</h5>
+                        <p class="card-text">Progress: 70%</p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-success" role="progressbar" style="width: 70%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-3 course-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Operating Systems</h5>
+                        <p class="card-text">Progress: 50%</p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-warning" role="progressbar" style="width: 50%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-3 course-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Database Management Systems</h5>
+                        <p class="card-text">Progress: 90%</p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-danger" role="progressbar" style="width: 90%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-3 course-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Computer Networks</h5>
+                        <p class="card-text">Progress: 40%</p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-info" role="progressbar" style="width: 40%;"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card mb-3 course-card">
+                    <div class="card-body">
+                        <h5 class="card-title">Artificial Intelligence</h5>
+                        <p class="card-text">Progress: 80%</p>
+                        <div class="progress">
+                            <div class="progress-bar progress-bar-striped bg-primary" role="progressbar" style="width: 80%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Task Notifications Section -->
+            <div class="col-xl-4 col-lg-5 col-md-12 mb-4 task-notifications">
+                <h5>Notifications</h5>
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-warning">Assignment 1 - Overdue</li>
+                    <li class="list-group-item list-group-item-warning">Assignment 2 - Due Tomorrow</li>
+                    <li class="list-group-item list-group-item-danger">Quiz - Overdue</li>
+                    <li class="list-group-item list-group-item-info">Project - Due in 5 Days</li>
+                </ul>   
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const courseCards = document.querySelectorAll('.course-card');
+
+            courseCards.forEach(card => {
+                card.addEventListener('mouseenter', () => {
+                    card.classList.add('shadow-lg');
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    card.classList.remove('shadow-lg');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
