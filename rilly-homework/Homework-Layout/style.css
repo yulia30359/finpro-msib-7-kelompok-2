@@ -1,0 +1,213 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Navbar Styling */
+.navbar {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #2c3e50;
+}
+
+.navbar-brand {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #ecf0f1 !important;
+}
+
+.navbar-nav .nav-item .nav-link {
+    color: #ecf0f1 !important;
+    font-size: 1.2rem;
+    padding: 0.8rem 1.5rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-item .nav-link::before {
+    content: '';
+    position: absolute;
+    bottom: -3px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: #1abc9c;
+    transition: width 0.3s;
+}
+
+.navbar-nav .nav-item .nav-link:hover::before {
+    width: 100%;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #1abc9c !important;
+}
+
+/* Course Cards */
+.course-card {
+    background-color: #fff;
+    border: none;
+    height: 145px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.course-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Progress Bar Styling */
+.progress {
+    height: 20px;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    font-weight: bold;
+}
+
+/* Task Notification Styling */
+.list-group-item {
+    font-size: 1.1rem;
+    border: none;
+    margin-bottom: 5px;
+}
+
+.sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 20px;
+}
+
+.card {
+    border-radius: 15px;
+}
+
+.card img {
+    border: 2px ;
+}
+
+.card-title {
+    font-weight: bold;
+}
+
+.btn-primary {
+    width: 100%; 
+    background-color: #001F3F;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+@media (min-width: 1200px) {
+    .navbar-brand {
+        font-size: 2rem;
+    }
+
+    .nav-link {
+        font-size: 1.2rem;
+    }
+
+    .card-title {
+        font-size: 1.5rem;
+    }
+
+    .list-group-item {
+        font-size: 1.2rem;
+    }
+}
+
+/* Large Devices (992px - 1199px) */
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .navbar-brand {
+        font-size: 1.8rem;
+    }
+
+    .nav-link {
+        font-size: 1.1rem;
+    }
+
+    .card-title {
+        font-size: 1.4rem;
+    }
+
+    .list-group-item {
+        font-size: 1.1rem;
+    }
+}
+
+/* Medium Devices/Tablets (768px - 991px) */
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .navbar-brand {
+        font-size: 1.6rem;
+    }
+
+    .nav-link {
+        font-size: 1rem;
+    }
+
+    .card-title {
+        font-size: 1.3rem;
+    }
+
+    .list-group-item {
+        font-size: 1rem;
+    }
+
+    .col-lg-8, .col-lg-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
+/* Small Devices/Mobile (≤ 767px) */
+/* Responsive Breakpoints */
+
+/* Small Devices/Mobile (≤ 767.98px) */
+@media (max-width: 767.98px) {
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+
+    .nav-link {
+        font-size: 0.9rem;
+    }
+
+    .card-title {
+        font-size: 1.2rem;
+    }
+
+    .list-group-item {
+        font-size: 0.9rem;
+    }
+
+    /* Modify column widths for mobile view */
+    .col-xl-8,
+    .col-lg-7 {
+        flex: 0 0 70%; /* Set the width of the courses section */
+        max-width: 70%; /* Set max-width to 70% */
+    }
+
+    .col-xl-4,
+    .col-lg-5 {
+        flex: 0 0 30%; /* Set the width of the notifications section */
+        max-width: 30%; /* Set max-width to 30% */
+    }
+
+    .task-notifications {
+        margin-top: 0; /* Remove top margin for mobile */
+    }
+
+    /* Ensure the row displays properly */
+    .row {
+        display: flex; /* Ensure the row uses flexbox */
+        flex-wrap: wrap; /* Allow wrapping */
+        margin-right: 0; /* Reset margin */
+        margin-left: 0; /* Reset margin */
+    }
+
+    .course-card {
+        margin-bottom: 15px; /* Ensure space between course cards */
+    }
+}
+
