@@ -1,0 +1,12 @@
+@media (min-width: 1024px) and (max-width: 1439px) {
+    .body-card-thumbnail {
+        padding-left: 0;
+        padding-right: 0;
+    }
+    .title {
+        font-size: 20px;
+    }
+    .rating, .year, .duration, .category, .fa-star {
+        font-size: 16px !important;
+    }
+}
