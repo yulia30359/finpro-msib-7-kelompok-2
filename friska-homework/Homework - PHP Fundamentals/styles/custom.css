@@ -1,0 +1,113 @@
+/* Hide the checkbox */
+@font-face {
+    font-family: "Geist";
+    src: url("fonts/Geist[wght].ttf") format("ttf");
+}
+
+* {
+    font-family: "Geist", sans-serif;
+    scroll-behavior: smooth;
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+/* Style for selected seat */
+input[type="checkbox"]:checked+.seat {
+    background-color: rgb(139 92 246);
+    /* Green for selected seats */
+}
+
+/* Style for booked seat */
+.booked {
+    background-color: #9ca3af;
+    /* Gray for booked seats */
+    cursor: not-allowed;
+}
+
+input[type="date"]::-webkit-inner-spin-button,
+input[type="date"]::-webkit-calendar-picker-indicator {
+    -webkit-appearance: none;
+    display: none;
+}
+
+.QR {
+    width: 225px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.line-decoration {
+    width: 273px;
+    height: 2px;
+    background-image: repeating-linear-gradient(90deg,
+            #000,
+            #000 15px,
+            transparent 15px,
+            transparent 30px);
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: -112px;
+    rotate: 90deg;
+}
+
+.info-ticket-type {
+    display: flex;
+    flex-direction: row;
+    gap: 90px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.adult-ticket,
+.child-ticket {
+    font-size: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.jumlah-adult-ticket,
+.jumlah-child-ticket {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.jumlah-before-discount {
+    font-size: 24px;
+    text-align: center;
+    position: relative;
+}
+
+.jumlah-before-discount.discounted {
+    color: #999999;
+}
+
+.jumlah-before-discount.discounted::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 100%;
+    height: 3px;
+    background-color: #d50000;
+    transform: rotate(-7deg);
+    transform-origin: center;
+}
+
+.discount {
+    font-size: 14px;
+    text-align: center;
+    color: #d50000;
+}
+
+.total-harga {
+    padding-top: 20px;
+}
+
+.jumlah-after-discount {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: center;
+}
