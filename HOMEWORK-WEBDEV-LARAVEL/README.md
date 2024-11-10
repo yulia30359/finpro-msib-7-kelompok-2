@@ -66,10 +66,11 @@ php artisan key:generate
 php artisan migrate --seed
 ```
 
-6. Start the Laravel development server
+6. Start the Laravel development server and Link the storage
 
 ```bash
 php artisan serve
+php artisan storage:link
 ```
 
 7. Start the React development server
