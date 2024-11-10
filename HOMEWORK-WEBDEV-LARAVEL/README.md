@@ -2,9 +2,6 @@
 
 This project is a homework assignment for Rakamin Academy, implementing an online bookstore web application. The system allows users to browse and purchase books while providing administrators with tools to manage inventory and orders.
 
-## Contributors
-
--   Fahmi Jabbar - [@Fahmousss](https://github.com/Fahmousss)
 
 Key Features:
 
@@ -87,3 +84,7 @@ npm run dev
 php artisan reverb:start --debug
 php artisan queue:work
 ```
+
+9. Login admin
+- email: admin@admin.online.book.id
+- password: password
