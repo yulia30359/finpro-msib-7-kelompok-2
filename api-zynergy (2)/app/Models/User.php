@@ -22,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'email',
         'password',
         'verification_codes',
+        'verification_codes_created_at', // Tambahkan kolom ini
     ];
 
     /**
@@ -39,20 +40,34 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var array<string, string>
      */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+        'verification_codes_created_at' => 'datetime', // Tambahkan kolom ini
+    ];
 
-     public function interests()
-     {
-         return $this->hasMany(Interest::class);
-     }
+        public function activities()
+    {
+        return $this->hasOne(UserActivity::class);
+    }
 
-     public function diseases()
-     {
-         return $this->hasMany(Disease::class);
-     }
+    public function interests()
+    {
+        return $this->belongsToMany(Interest::class, 'user_interest');
+    }
 
-     public function allergies()
-     {
-         return $this->hasMany(Allergy::class);
-     }
+    public function favorites()
+    {
+        return $this->belongsToMany(Favorite::class, 'user_favorites');
+    }
+
+    public function diseases()
+    {
+        return $this->belongsToMany(Disease::class, 'user_disease');
+    }
+
+    public function allergies()
+    {
+        return $this->belongsToMany(Allergy::class, 'user_allergy');
+    }
 
 }

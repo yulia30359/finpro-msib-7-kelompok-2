@@ -34,6 +34,17 @@ class AuthController extends Controller
         $input['password'] = bcrypt($input['password']);
         $user = User::create($input);
 
+        // Generate a single 5-digit OTP
+        $otp = str_pad(rand(0, 99999), 5, '0', STR_PAD_LEFT);
+
+        // Save OTP and creation time to user
+        $user->verification_codes = $otp;
+        $user->verification_codes_created_at = now();
+        $user->save();
+
+        // Send email with OTP
+        Mail::to($user->email)->send(new EmailVerification($otp));
+
         $success['token'] = $user->createToken('auth_token')->plainTextToken;
         $success['name'] = $user->name;
 
@@ -42,6 +53,66 @@ class AuthController extends Controller
             'message' => 'Sukses mendaftar, silahkan verifikasi Email anda!',
             'data' => $success
         ]);
+    }
+
+    public function verifyEmail(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'otp' => 'required|string|size:5',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Ada kesalahan',
+                'data' => $validator->errors()
+            ], 422);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user) {
+            return response()->json([
+                'success' => false,
+                'message' => 'User not found',
+                'data' => null
+            ], 404);
+        }
+
+        // Check if OTP is still valid (10 minutes)
+        if ($user->verification_codes_created_at && now()->diffInMinutes($user->verification_codes_created_at) > 10) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Verification code has expired',
+                'data' => null
+            ], 400);
+        }
+
+        if ($request->otp === $user->verification_codes) {
+            $user->email_verified_at = now();
+            $user->verification_codes = null;
+            $user->verification_codes_created_at = null;
+            $user->save();
+
+            // Generate token for automatic login
+            $token = $user->createToken('auth_token')->plainTextToken;
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Email verified successfully',
+                'data' => [
+                    'token' => $token,
+                    'user' => $user,
+                ]
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'message' => 'Verification code does not match',
+                'data' => null
+            ], 400);
+        }
     }
 
     public function login(Request $request)

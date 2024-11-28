@@ -7,6 +7,8 @@ use App\Http\Controllers\API\MealReminderController;
 use App\Http\Controllers\API\SleepReminderController;
 use App\Http\Controllers\API\LightActivityReminderController;
 use App\Http\Controllers\API\HealthCheckupReminderController;
+use App\Http\Controllers\API\PersonalizedController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -21,6 +23,7 @@ use App\Http\Controllers\API\HealthCheckupReminderController;
 Route::post('/register', [App\Http\Controllers\API\AuthController::class, 'register']);
 Route::post('/login', [App\Http\Controllers\API\AuthController::class, 'login']);
 Route::post('/logout', [App\Http\Controllers\API\AuthController::class, 'logout'])->middleware('auth:sanctum');
+Route::post('/verify-email', [App\Http\Controllers\API\AuthController::class, 'verifyEmail']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::resource('meal-reminders', MealReminderController::class);
@@ -29,6 +32,20 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::resource('health-checkup-reminders', HealthCheckupReminderController::class);
 });
 
+Route::middleware(['auth:sanctum', 'verified'])->group(function () {
+    Route::resource('meal-reminders', MealReminderController::class);
+    Route::resource('sleep-reminders', SleepReminderController::class);
+    Route::resource('light-activity-reminders', LightActivityReminderController::class);
+    Route::resource('health-checkup-reminders', HealthCheckupReminderController::class);
+});
+
+
+Route::middleware('auth:sanctum')->group(function () {
+    Route::post('personalize/interests', [PersonalizedController::class, 'storeInterests']);
+    Route::post('personalize/favorites', [PersonalizedController::class, 'storeFavorites']);
+    Route::post('personalize/diseases', [PersonalizedController::class, 'storeDiseases']);
+    Route::post('personalize/allergies', [PersonalizedController::class, 'storeAllergies']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
